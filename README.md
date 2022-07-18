@@ -16,7 +16,7 @@ A simple shop site, where you can add products to your cart and order them. Also
 1. CSRF --> People could create fake sites, that can lead to my backend. That would be very unsafe, thats why this protection was implemented. csurf was used to prevent this.
 2. Password encryption when stored in the database. Bcrypt.js was used for this. 
 3. Environmental variables --> Anyione with the source code, will not have access to this variables.
-4. Sessions --> 
+4. Sessions --> Authentication in the server for the same user.
 
 ### Some Documentation:
 
