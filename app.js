@@ -1,7 +1,7 @@
 const path = require("path");
-const fs = require("fs");
+// const fs = require("fs");
 // encrypts data, therefore is more secure
-const https = require("https");
+// const https = require("https");
 // makes it possible for us to use
 // Require the express framework
 const express = require("express");
@@ -19,8 +19,6 @@ const MongoDbStore = require("connect-mongodb-session")(session);
 const csrf = require("csurf");
 // flash messages
 const flash = require("connect-flash");
-// Secure headers package
-const helmet = require("helmet");
 // compress files when rendered in the browser
 const compression = require("compression");
 // import the error controller
@@ -38,8 +36,8 @@ const store = new MongoDbStore({
 });
 
 // https keys
-const privateKey = fs.readFileSync("server.key");
-const certificate = fs.readFileSync("server.cert");
+// const privateKey = fs.readFileSync("server.key");
+// const certificate = fs.readFileSync("server.cert");
 
 // declare the name of the file and in which folder it will be saved
 const fileStorage = multer.diskStorage({
@@ -75,11 +73,12 @@ const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
 const authRoutes = require("./routes/auth");
 
-// files for loggs
-const accessLogStream = fs.createWriteStream(
-  path.join(__dirname, "access.log"),
-  { flags: "a" }
-);
+// // files for loggs
+// const accessLogStream = fs.createWriteStream(
+//   path.join(__dirname, "access.log"),
+//   { flags: "a" }
+// );
+
 // add secure headers to our responses
 // app.use(
 //   helmet({
