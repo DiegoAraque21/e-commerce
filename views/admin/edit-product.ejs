@@ -1,0 +1,66 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+
+    <main>
+        <% if(message) {%>
+            <% if(hasError) { %>
+              <%- include("../includes/flash-messages.ejs", {failureMessage: message}) %>
+            <% } else { %>
+              <%- include("../includes/flash-messages.ejs", {successMessage: message}) %> 
+            <% } %>
+          <% } %>
+        <!-- CONTAINER -->
+        <div class="container">
+            <form class="inner_container" action="/admin/<% if (editing) { %>edit-product<% } else { %>add-product<% } %>" enctype="multipart/form-data" method="POST" novalidate>
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                <!-- TITLE -->
+                <h1 class="text-dark text-center mb-3"><% if(editing) { %><%= "Edit Product" %><%}else{%><%="Add Product"%><%}%></h1>
+                <!-- Title -->
+                <div class="col-md-12">
+                    <label for="title" class="form-label text-dark">Title</label>
+                    <input type="text" name="title" class="form-control <%= validationErrors.find(e => e.param === "title") ? "invalid" : "" %>" id="email" value="<% if (editing || hasError) { %><%= product.title %><% } %>"/>
+                </div>
+                <!-- Image -->
+                <div class="col-md-12">
+                    <label for="image" class="form-label text-dark mt-2">Image</label>
+                    <input
+                    type="file"
+                    name="image"
+                    id="image"
+                    class="form-control"
+                    />
+                </div>
+                <!-- Stock -->
+                <div class="col-md-12">
+                    <label for="amount" class="form-label text-dark">In-Stock</label>
+                    <input type="number" name="amount" class="form-control <%= validationErrors.find(e => e.param === "amount") ? "invalid" : "" %>" id="amount" value="<% if (editing || hasError) { %><%= product.amount %><% } %>"/>
+                </div>
+                <!-- Price -->
+                <div class="col-md-12">
+                    <label for="price" class="form-label text-dark">Price</label>
+                    <input type="number" name="price" step="0.01"  class="form-control <%= validationErrors.find(e => e.param === "price") ? "invalid" : "" %>" id="price" value="<% if (editing || hasError) { %><%= product.price %><% } %>"/>
+                </div>
+                <!-- Description -->
+                <div class="col-md-12">
+                    <label for="description" class="form-label text-dark">Description</label>
+                    <textarea 
+                    class="form-control <%= validationErrors.find(e => e.param ===  "description") ? "invalid" : "" %> " 
+                    name="description" 
+                    id="description" 
+                    rows="5"><% if (editing || hasError) { %><%= product.description %><% }%></textarea>
+                </div>
+                <% if (editing) { %>
+                    <input type="hidden" value="<%= product._id %>" name="productId">
+                <% } %>
+                <!-- BUTTON -->
+                <div class="col-md-12 mt-4">
+                    <button class="btn btn-outline-success w-100" type="submit"><% if (editing) { %>Update Product<% } else { %>Add Product<% } %></button>
+                </div>
+            </form>
+        </div>
+    </main>
+<%- include('../includes/end.ejs') %>

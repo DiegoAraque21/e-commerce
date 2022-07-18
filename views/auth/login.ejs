@@ -1,0 +1,50 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+
+    <main>
+        <% if(message) {%>
+            <% if(type === "failure") { %>
+              <%- include("../includes/flash-messages.ejs", {failureMessage: message}) %>
+            <% } else { %>
+              <%- include("../includes/flash-messages.ejs", {successMessage: message}) %> 
+            <% } %>
+          <% } %>
+        <!-- CONTAINER -->
+        <div class="container">
+            <form class="inner_container " action="login" method="POST" novalidate>
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                <!-- TITLE -->
+                <h1 class="text-dark text-center mb-3">Log In</h1>
+                <!-- EMAIL -->
+                <div class="col-md-12">
+                    <label for="email" class="form-label text-dark">Email</label>
+                    <input type="text" name="email" class="form-control <%= validationErrors.find(e => e.param === "email") ? "invalid" : "" %>" id="email" value="<%= oldInput.email %>"/>
+                </div>
+        
+                <!-- PASSWORD -->
+                <div class="col-md-12">
+                    <label for="password" class="form-label text-dark mt-2">Password</label>
+                    <input
+                    type="password"
+                    name="password"
+                    class="form-control <%= validationErrors.find(e => e.param === "password") ? "invalid" : "" %>"
+                    id="password"
+                    value="<%= oldInput.password %>"
+                    />
+                </div>
+        
+                <!-- BUTTON -->
+                <div class="col-md-12 mt-4">
+                    <button type="submit" class="btn btn-outline-success w-100">Log In</button>
+                </div>
+            </form>
+        </div>
+        <div class="centered mt-3">
+            <a href="/reset">Reset your password</a>
+        </div>
+    </main>
+<%- include('../includes/end.ejs') %>

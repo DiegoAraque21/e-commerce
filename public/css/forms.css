@@ -1,0 +1,17 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.inner_container {
+  width: 20em;
+}
+
+input.invalid,
+select.invalid,
+textarea.invalid {
+  border-color: red;
+}

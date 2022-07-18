@@ -1,0 +1,31 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+
+    <main>
+        <% if(message) {%>
+            <% if(type === "failure") { %>
+              <%- include("../includes/flash-messages.ejs", {failureMessage: message}) %>
+            <% } else { %>
+              <%- include("../includes/flash-messages.ejs", {successMessage: message}) %> 
+            <% } %>
+          <% } %>
+        <div class="container">
+            <form class="inner_container" action="/reset" method="POST">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                 <!-- TITLE -->
+                <h1 class="text-dark text-center mb-3">Reset Password</h1>
+                <div class="col-md-12">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" class="form-control">
+                </div>
+                <div>
+                    <button class="btn btn-outline-success mt-4 w-100" type="submit">Reset Password</button>
+                </div>
+            </form>
+        </div>
+    </main>
+<%- include('../includes/end.ejs') %>

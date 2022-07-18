@@ -1,0 +1,33 @@
+<%- include('../includes/head.ejs') %>
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+
+    <main>
+        <%- include("../includes/flash-messages.ejs") %>
+        <% if (prods.length > 0) { %>
+            <div class="grid">
+                <% for (let product of prods) { %>
+                    <div class="card" style="width: 18rem; margin-top: 2rem;">
+                        <img class="card-img-top image" src="/<%= product.imageUrl %>" alt="<%= product.title %>">
+                        <div class="card-body">
+                          <h5 class="card-title"><%= product.title %></h5>
+                          <h6 class="card-subtitle mb-2 text-muted">$<%= product.price %></h6>
+                          <p class="card-text"><%= product.description %></p>
+                          <div class="d-flex aligns-items-center justify-content-center" style="margin-top: 0.5rem">
+                            <a href="/products/<%= product._id %>" class="btn btn-outline-primary">Details</a>
+                            <% if (isAuthenticated) { %>
+                                <%- include('../includes/add-to-cart.ejs', {product: product}) %>
+                                <% } %>
+                          </div>
+                        </div>
+                      </div>
+                <% } %>
+            </div>
+            <%- include("../includes/pagination.ejs", {currentPage: currentPage, hasPreviousPage: hasPreviousPage, nextPage: nextPage, lastPage: lastPage, hasNextPage: hasNextPage, hasPreviousPage: hasPreviousPage}) %>
+        <% } else { %>
+            <h1>No Products Found!</h1>
+        <% } %>
+    </main>
+<%- include('../includes/end.ejs') %>

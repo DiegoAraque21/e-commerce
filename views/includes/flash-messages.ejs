@@ -1,0 +1,7 @@
+<% if(successMessage.length !== 0) {%>
+<div class="alert alert-success" role="alert" style="margin-bottom: 1rem">
+  <%= successMessage %>
+</div>
+<% } %> <% if(failureMessage.length !== 0) {%>
+<div class="alert alert-danger" role="alert"><%= failureMessage %></div>
+<% } %>
