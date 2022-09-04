@@ -1,6 +1,6 @@
 # E-commerce
 
-The app was deployed in heroku, you can visit the site here: http://e-commerce-diego-project.herokuapp.com/
+The app was deployed in railway, you can visit the site here: https://web-production-c42f.up.railway.app/
 
 A simple shop site, where you can add products to your cart and order them. Also you can add the products you want to sell, and they would be able to everyone. To get acces to all the fetaures, you should login.
 
